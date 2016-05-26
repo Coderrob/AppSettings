@@ -12,6 +12,7 @@ AppSettings.Get("")
 AppSettings.Get<int>("TimeoutValue")
 
 // A safe check around getting a numeric value
-AppSettings.TryGet<long>("IsntNumericValue")
+long value;
+AppSettings.TryGet<long>("IsntNumericValue", out value)
 ```
 

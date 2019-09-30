@@ -14,12 +14,9 @@ namespace Utilities
         {
             var value = Get(key);
 
-            if (string.IsNullOrEmpty(value))
-            {
-                return default(TValue);
-            }
+            if (string.IsNullOrEmpty(value)) return default;
 
-            return (TValue) Convert.ChangeType(value, typeof (TValue));
+            return (TValue) TypeDescriptor.GetConverter(typeof(TValue)).ConvertFromInvariantString(value);
         }
 
         public static bool TryGet<TValue>(string key, out TValue value)
@@ -31,7 +28,7 @@ namespace Utilities
             }
             catch (Exception)
             {
-                value = default(TValue);
+                value = default;
                 return false;
             }
         }
